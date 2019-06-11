@@ -1,0 +1,30 @@
+﻿@page "/chat"
+@inject IJSRuntime JSRuntime
+
+<div class="container">
+    <h1 class="title">Chat:</h1>
+    <div>
+        <div class="chatwindow">
+            <ul></ul>
+        </div>
+        <input class="item" ref="inputMessage" bind="message" name="message" type="text" placeholder="Send a message" aria-placeholder="Send a message" />
+        <button class="item" onclick="@SendMessage">Submit</button>
+        <br />
+        <NavLink class="nav-link" href="/">
+            Home
+        </NavLink>
+    </div>
+</div>
+
+
+@functions {
+    ElementRef inputMessage;
+    string message;
+
+    async void SendMessage()
+    {
+        System.Console.WriteLine(string.Format("sending message: {0}", message));
+        message = string.Empty;
+        await JSRuntime.InvokeAsync<object>("utils.focusElement", inputMessage);
+    }
+}

@@ -1,0 +1,22 @@
+﻿@page "/register"
+@using Microsoft.AspNetCore.Components
+@inject IUriHelper UriHelper
+
+<h1>Chat</h1>
+
+<label for="username">What is your username?</label>
+<input type="text" bind="username" name="username" id="username" />
+
+<button class="btn btn-primary" onclick="@Connect">Submit</button>
+
+
+@functions {
+    string username;
+
+    void Connect()
+    {
+        System.Console.WriteLine(string.Format("Connecting to server as {0}", username));
+        UriHelper.NavigateTo("chat");
+        //UriHelper.NaviageTo("chat");
+    }
+}

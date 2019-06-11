@@ -45,16 +45,25 @@ namespace BlazorMessenger.Server
 
             app.UseBlazor<Client.Startup>();
 
-            ElectronBootstrap();
+            ElectronBootstrap(env);
         }
 
-        private async void ElectronBootstrap()
+        private async void ElectronBootstrap(IWebHostEnvironment env)
         {
             var browserWindow = await Electron.WindowManager.CreateWindowAsync(new BrowserWindowOptions
             {
                 Width = 1280,
-                Height = 1080
+                Height = 1080,
+                WebPreferences = new WebPreferences
+                {
+                    DevTools = env.IsDevelopment()
+                }
             });
+
+            if (env.IsDevelopment())
+            {
+                browserWindow.WebContents.OpenDevTools();
+            }
 
             browserWindow.SetTitle("Electron.NET Blazor Messenger Sandbox");
         }
