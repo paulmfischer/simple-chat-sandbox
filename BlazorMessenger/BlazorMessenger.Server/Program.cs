@@ -10,25 +10,42 @@ namespace BlazorMessenger.Server
     {
         public static void Main(string[] args)
         {
+            //System.Console.WriteLine(string.Format("args: {0} {1} {2} {3}", args));
             BuildWebHost(args).Run();
-            //CreateHostBuilder(args).Build().Run();
+            //BuildWebHost2(args).Run();
         }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseElectron(args).UseStartup<Startup>();
-                });
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseConfiguration(new ConfigurationBuilder()
-                    .AddCommandLine(args)
-                    .Build()
+                .UseConfiguration(
+                    new ConfigurationBuilder()
+                        .AddCommandLine(args)
+                        .Build()
                 )
                 .UseElectron(args)
                 .UseStartup<Startup>()
                 .Build();
+
+        //public static IWebHost BuildWebHost2(string[] args)
+        //{
+        //    var builder = WebHost.CreateDefaultBuilder(args)
+        //        .UseConfiguration(new ConfigurationBuilder()
+        //            .AddCommandLine(args)
+        //            .Build()
+        //        )//;
+        //        .UseElectron(args)
+        //        .UseStartup<Startup>()
+        //        .Build();
+
+        //    return builder;
+
+        //    //if (args.Contains("electron"))
+        //    //{
+        //    //    builder.UseElectron(args);
+        //    //}
+
+        //    //return builder.UseStartup<Startup>()
+        //    //    .Build();
+        //}
     }
 }

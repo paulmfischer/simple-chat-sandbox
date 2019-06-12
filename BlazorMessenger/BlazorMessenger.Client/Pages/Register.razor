@@ -1,6 +1,8 @@
 ﻿@page "/register"
 @using Microsoft.AspNetCore.Components
+@using BlazorMessenger.Shared
 @inject IUriHelper UriHelper
+@*@inject IClientService ClientService*@
 
 <h1>Chat</h1>
 
@@ -17,6 +19,6 @@
     {
         System.Console.WriteLine(string.Format("Connecting to server as {0}", username));
         UriHelper.NavigateTo("chat");
-        //UriHelper.NaviageTo("chat");
+        //ClientService.Connect(username);
     }
 }
